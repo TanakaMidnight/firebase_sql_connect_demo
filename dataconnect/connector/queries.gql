@@ -1,0 +1,28 @@
+# すべてのTODO項目を取得するクエリ（作成日時の降順でソート）
+# 関連するカテゴリ情報（名前・カラー）もネストして同時に取得します。
+query ListTodos @auth(level: PUBLIC) {
+  todos(orderBy: [{ createdAt: DESC }]) {
+    id
+    title
+    description
+    isCompleted
+    dueDate
+    priority
+    createdAt
+    updatedAt
+    category {
+      id
+      name
+      color
+    }
+  }
+}
+
+# 登録されているすべてのカテゴリ項目を取得するクエリ（カテゴリ名の昇順でソート）
+query ListCategories @auth(level: PUBLIC) {
+  categories(orderBy: [{ name: ASC }]) {
+    id
+    name
+    color
+  }
+}

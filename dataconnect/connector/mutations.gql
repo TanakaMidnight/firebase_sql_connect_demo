@@ -1,0 +1,54 @@
+# 新しいTODO項目を追加するミューテーション
+# 注: Data Connect の挿入処理 (todo_insert) の戻り値はキー構造体 (Todo_KeyOutput) となり、
+# サブフィールドを持たないため、中括弧での選択リスト (例: { id }) は記述しません。
+mutation CreateTodo(
+  $title: String!
+  $description: String
+  $dueDate: Date
+  $priority: String
+  $categoryId: UUID
+) @auth(level: PUBLIC) {
+  todo_insert(
+    data: {
+      title: $title
+      description: $description
+      dueDate: $dueDate
+      priority: $priority
+      categoryId: $categoryId
+    }
+  )
+}
+
+# 既存のTODO項目を更新するミューテーション
+mutation UpdateTodo(
+  $id: UUID!
+  $title: String
+  $description: String
+  $isCompleted: Boolean
+  $dueDate: Date
+  $priority: String
+  $categoryId: UUID
+) @auth(level: PUBLIC) {
+  todo_update(
+    key: { id: $id }
+    data: {
+      title: $title
+      description: $description
+      isCompleted: $isCompleted
+      dueDate: $dueDate
+      priority: $priority
+      categoryId: $categoryId
+      updatedAt_expr: "request.time" # 更新日時を自動設定
+    }
+  )
+}
+
+# TODO項目を削除するミューテーション
+mutation DeleteTodo($id: UUID!) @auth(level: PUBLIC) {
+  todo_delete(key: { id: $id })
+}
+
+# 新しいカテゴリを追加するミューテーション
+mutation CreateCategory($name: String!, $color: String!) @auth(level: PUBLIC) {
+  category_insert(data: { name: $name, color: $color })
+}

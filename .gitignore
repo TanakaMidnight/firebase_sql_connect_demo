@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Firebase 関連
+.firebase/
+firebase-debug.log*
+ui-debug.log*
+dataconnect-debug.log*
+.emulator_data/
+
+# Firebase Data Connect 関連
+# エミュレータの一時データ（PGLiteやマイグレーション用データ）を除外
+dataconnect/.dataconnect/
+# 自動生成されるクライアントSDKはエミュレータ起動時に生成されるため除外
+src/generated/dataconnect/
+
+# 環境変数・ローカル設定ファイル
+.env
+.env.local
+.env.*.local
+

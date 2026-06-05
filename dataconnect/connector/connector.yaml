@@ -1,0 +1,8 @@
+connectorId: "todo-connector" # コネクタの一意なID
+
+# クライアント向けSDKの自動生成設定
+generate:
+  javascriptSdk:
+    outputDir: "../../src/generated/dataconnect" # 生成された TypeScript SDK の出力先ディレクトリ (ルートの src 直下)
+    package: "@firebasegen/todo-connector"        # SDK パッケージ名
+    packageJsonDir: "../../"                      # ルートの package.json のディレクトリ (ルート直下)

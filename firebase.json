@@ -1,0 +1,19 @@
+{
+  "dataconnect": {
+    "source": "dataconnect"
+  },
+  "emulators": {
+    "dataconnect": {
+      "port": 9399,
+      "host": "0.0.0.0",
+      "postgres": {
+        "connectionString": "postgresql://postgres:mysecretpassword@db:5432/tododb?sslmode=disable"
+      }
+    },
+    "ui": {
+      "enabled": true,
+      "host": "0.0.0.0",
+      "port": 4000
+    }
+  }
+}

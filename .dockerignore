@@ -1,0 +1,8 @@
+node_modules
+.git
+.emulator_data
+dataconnect/.dataconnect
+dist
+Dockerfile
+docker-compose.yml
+.env

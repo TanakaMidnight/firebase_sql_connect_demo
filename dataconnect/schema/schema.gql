@@ -1,0 +1,43 @@
+# Firebase Data Connect のデータベーススキーマ定義ファイル
+
+# カテゴリ定義テーブル
+type Category @table(key: "id") {
+  # UUIDv4 で一意な識別子を自動生成
+  id: UUID! @default(expr: "uuidV4()")
+  
+  # カテゴリ名（ユニーク）
+  name: String! @unique
+  
+  # UI表示用のカラーコード（デフォルトはインディゴ色）
+  color: String! @default(value: "#6366f1")
+}
+
+# TODO定義テーブル
+type Todo @table(key: "id") {
+  # UUIDv4 で一意な識別子を自動生成
+  id: UUID! @default(expr: "uuidV4()")
+  
+  # TODOのタイトル
+  title: String!
+  
+  # TODOの補足説明（任意入力）
+  description: String
+  
+  # 完了フラグ（初期値は未完了）
+  isCompleted: Boolean! @default(value: false)
+  
+  # 期限日（任意設定）
+  dueDate: Date
+  
+  # 優先度（デフォルトは中。high / medium / low）
+  priority: String! @default(value: "medium")
+  
+  # Category テーブルへのリレーションシップ（外部キー categoryId が暗黙的に生成される）
+  category: Category
+  
+  # 作成日時（書き込み時のタイムスタンプを自動設定）
+  createdAt: Timestamp! @default(expr: "request.time")
+  
+  # 更新日時（書き込み時のタイムスタンプを自動設定）
+  updatedAt: Timestamp! @default(expr: "request.time")
+}

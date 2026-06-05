@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "todo-service" # サービス識別ID
+location: "us-central1"   # 本番環境デプロイ時のロケーション
+schema:
+  source: "schema"        # スキーマファイルが配置されているディレクトリ
+  datasource:
+    postgresql:
+      database: "tododb"  # 対象のデータベース名
+      cloudSql:
+        instanceId: "todo-instance" # 本番環境デプロイ時の Cloud SQL インスタンスID (ダミー値)
+connectorDirs:
+  - "connector"           # クライアントSDK等を作成するコネクタ定義のディレクトリ

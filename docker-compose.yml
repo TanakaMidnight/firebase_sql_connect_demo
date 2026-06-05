@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # データベースサービス (PostgreSQL 16)
+  db:
+    image: postgres:16-alpine
+    container_name: fdc-postgres-db
+    ports:
+      - "5432:5432" # ホストマシンからも直接接続できるように 5432 ポートを開放
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: tododb
+    volumes:
+      - pgdata:/var/lib/postgresql/data # データベースデータを永続化
+    networks:
+      - fdc-network
+
+  # アプリケーションおよびエミュレータサービス (Vite + Firebase Emulator)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fdc-app
+    ports:
+      - "5173:5173"   # Vite 開発サーバーのポート
+      - "4000:4000"   # Firebase Emulator UI
+      - "9399:9399"   # Firebase Data Connect エミュレータのポート
+    volumes:
+      - .:/app        # カレントディレクトリをマウント
+      - /app/node_modules # ホストの node_modules がコンテナ内を汚染しないように無名ボリュームを使用
+    environment:
+      - NODE_ENV=development
+    # 起動コマンド:
+    # 1. 依存ライブラリのインストールを完全に待機 (npm install --legacy-peer-deps)
+    # 2. サブシェル ( ) 内で、プロジェクトIDを指定して Firebase エミュレータをバックグラウンド起動しつつ、Vite 開発サーバーを起動
+    command: sh -c "npm install --legacy-peer-deps && (firebase emulators:start --project=demo-project --import=./.emulator_data --export-on-exit=./.emulator_data & npm run dev -- --host)"
+    depends_on:
+      - db # PostgreSQL が起動した後に開始するように依存関係を定義
+    networks:
+      - fdc-network
+
+# データの永続化用ボリューム
+volumes:
+  pgdata:
+
+# コンテナ間連携用のネットワーク定義
+networks:
+  fdc-network:
+    driver: bridge
