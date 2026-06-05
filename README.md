@@ -6,6 +6,7 @@ Docker Compose 環境下で、ローカルデータベース（Postgres）と Fi
 ---
 
 ## 🚀 主な機能
+
 - **TODO（タスク）の管理**: 追加、更新（完了状態のトグル）、削除。
 - **リレーショナルデータモデル**: 各TODOに対する「カテゴリ」（Hexカラーコード付き）の紐付け。
 - **ダッシュボード（統計情報）**: 全タスク数、完了済み、未完了、期限切れタスク数のリアルタイムサマリー表示。
@@ -41,6 +42,7 @@ Docker Compose 環境下で、ローカルデータベース（Postgres）と Fi
 ローカルマシン上で Docker Desktop が起動している必要があります。
 
 ### 1. リポジトリの準備とビルド・起動
+
 ターミナルで本プロジェクトのルートディレクトリに移動し、以下のコマンドを実行します。
 
 ```bash
@@ -52,11 +54,11 @@ docker compose up --build
 
 ### 2. アプリへのアクセス
 
-| サービス名 | アクセス URL | 説明 |
-| :--- | :--- | :--- |
-| **TODO アプリ (Vite)** | [http://localhost:5173](http://localhost:5173) | タスク管理画面（メインUI） |
-| **Firebase Emulator UI** | [http://localhost:4000](http://localhost:4000) | エミュレータ統合管理画面 |
-| **Data Connect API** | [http://localhost:9399](http://localhost:9399) | GraphQL エンドポイント |
+| サービス名               | アクセス URL                                   | 説明                       |
+| :----------------------- | :--------------------------------------------- | :------------------------- |
+| **TODO アプリ (Vite)**   | [http://localhost:5173](http://localhost:5173) | タスク管理画面（メインUI） |
+| **Firebase Emulator UI** | [http://localhost:4000](http://localhost:4000) | エミュレータ統合管理画面   |
+| **Data Connect API**     | [http://localhost:9399](http://localhost:9399) | GraphQL エンドポイント     |
 
 ---
 
@@ -85,5 +87,5 @@ docker compose up --build
 ---
 
 ## 📚 ドキュメント情報
+
 - **詳細設計書**: テーブル構造、GraphQL API 設計、デザインシステムなどについては [docs/design_document.md](docs/design_document.md) を参照してください。
-- **実装・変更ログ**: 開発時の変更履歴については自動生成された [walkthrough.md](walkthrough.md)（アーティファクト）も確認いただけます。
